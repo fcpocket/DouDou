@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>打印</title>
+    {% load  static  %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="{% static "css/sb-admin.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "font-awesome/css/font-awesome.min.css" %}">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="{% static "css/morris-0.4.3.min.css" %}">
+  </head>
+  <script language="javascript" src="{% static "js/LodopFuncs.js" %}"></script>
+	<object id="LODOP_OB"
+		classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+		<embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+	</object>
+  <script language="JavaScript" type="text/javascript">
+
+        var LODOP; //声明为全局变量
+
+        function myPreview() {
+            CreatePrintPage();
+            LODOP.PREVIEW();
+        };
+
+        function upperCaseskp()
+            {
+
+                var x=document.getElementById("skpsl").value
+                document.getElementById("skpsl").value=x.toUpperCase()
+                var skpje =x*200
+                document.getElementById("skpje").innerText="￥"+skpje;
+
+        }
+        function upperCasebsp()
+            {
+                var x=document.getElementById("bspsl").value
+                document.getElementById("bspsl").value=x.toUpperCase()
+                var bspje =x*100
+                document.getElementById("bspje").innerText="￥"+bspje;
+
+        }
+        function upperCasefwone()
+            {
+
+                var x=document.getElementById("fwonesl").value
+                document.getElementById("fwonesl").value=x.toUpperCase()
+                var skpje =x*280
+                document.getElementById("fwoneje").innerText="￥"+skpje;
+
+        }
+        function upperCasefwtwo()
+            {
+                var x=document.getElementById("fwtwosl").value
+                document.getElementById("fwtwosl").value=x.toUpperCase()
+                var skpje =x*140
+                document.getElementById("fwtwoje").innerText="￥"+skpje;
+        }
+
+        function hejijine() {
+             var x1=document.getElementById("skpsl").value
+             var x2=document.getElementById("bspsl").value
+             var x3=document.getElementById("fwonesl").value
+             var x4=document.getElementById("fwtwosl").value
+             var heji = x1*200+x2*100+x3*280+x4*140
+             document.getElementById("hejisz").innerText=heji;
+             var hj = heji.toString();
+             tmpnewchar = ""
+             for(var i = 0;i<hj.length;i++){
+                 var q = hj[i];
+                  switch (q) {
+                    case "0": tmpnewchar =  tmpnewchar + "零" ; break;
+                    case "1": tmpnewchar =  tmpnewchar + "壹" ; break;
+                    case "2": tmpnewchar =  tmpnewchar + "贰" ; break;
+                    case "3": tmpnewchar =  tmpnewchar + "叁" ; break;
+                    case "4": tmpnewchar =  tmpnewchar + "肆" ; break;
+                    case "5": tmpnewchar =  tmpnewchar + "伍" ; break;
+                    case "6": tmpnewchar =  tmpnewchar + "陆" ; break;
+                    case "7": tmpnewchar =  tmpnewchar + "柒" ; break;
+                    case "8": tmpnewchar =  tmpnewchar + "捌" ; break;
+                    case "9": tmpnewchar =  tmpnewchar + "玖" ; break;
+                }
+            }
+            var h= parseInt(hj.length)
+            if(h==4){
+                document.getElementById("hejidx").innerText=tmpnewchar;
+            }else if (h==3){
+                tmpnewchar = "零"+tmpnewchar;
+                document.getElementById("hejidx").innerText=tmpnewchar;
+            }
+
+
+        }
+
+        function ceshi() {
+            var date = new Date();
+            var month = date.getMonth()+1;
+            var da = date.getFullYear()+"-"+month +"-"+date.getDate()
+            alert(da)
+        }
+		function CreatePrintPage() {
+            var qyname = $('#qyname').text();
+            var sbh = $('#sbh').text();
+            var name = $('#name').text();
+            var qytype = $('#qytype').text();
+            var hytype = $('#hytype').text();
+            var qyaddress = $('#qyaddress').text();
+            var phone = $('#phone').text();
+            var fptype = $('#fptype').text();
+            var sstype = $('#sstype').text();
+            var skpsl = $('#skpsl').val();
+            //alert(skpsl)
+            var skpje = $('#skpje').text();
+            var skp = $('#skp').text();
+            var bsp = $('#bsp').text();
+            var bspsl = $('#bspsl').val();
+            var bspje = $('#bspje').text();
+            var fwonesl = $('#fwonesl').val();
+            var fwoneje = $('#fwoneje').text();
+            var fwtwosl = $('#fwtwosl').val();
+            var fwtwoje = $('#fwtwoje').text();
+            var time = $('#time').text();
+            var hejisz =$("#hejisz").text();
+            var hejidx = $("#hejidx").text();
+            var kaihu = $('#kaihu').text();
+
+
+            var date = new Date();
+            var month = date.getMonth()+1;
+            var da = date.getFullYear()+"-"+month +"-"+date.getDate()
+
+            //alert(time)
+            //var qnian = time.split('-')[0];
+            //var qyue =time.split('-')[1];
+            //var qri =time.split('-')[2];
+            //var znian =time.split('-')[3];
+            //var zyue =time.split('-')[4];
+            //var zri =time.split('-')[5];
+            //alert(qnian+qyue+qri+znian+zyue+zri)
+            LODOP=getLodop();
+            LODOP.PRINT_INITA(8,7,800,1200,"打印合同");
+            LODOP.SET_PRINT_MODE("PRINT_NOCOLLATE",1);
+            LODOP.SET_PRINT_STYLE("FontSize",11);
+            LODOP.ADD_PRINT_TEXT(165,135,1000,25,qyname);
+            LODOP.ADD_PRINT_TEXT(195,135,600,25,sbh);
+            if(qytype=="小规模"){
+                LODOP.ADD_PRINT_TEXT(195,576,50,25,"Y");
+                LODOP.ADD_PRINT_TEXT(288,254,50,25,"Y");
+                //无用占格
+                LODOP.ADD_PRINT_TEXT(300,300,50,25,"");
+                //LODOP.ADD_PRINT_SHAPE(4,195,576,10,10,0,1,"#000000");
+                //LODOP.ADD_PRINT_SHAPE(4,288,254,10,10,0,1,"#000000");
+            }else{
+                LODOP.ADD_PRINT_TEXT(195,458,50,25,"Y");
+                LODOP.ADD_PRINT_TEXT(288,144,50,25,"Y");
+                LODOP.ADD_PRINT_TEXT(288,254,50,25,"Y");
+                //LODOP.ADD_PRINT_SHAPE(4,195,458,10,10,0,1,"#000000");
+                //LODOP.ADD_PRINT_SHAPE(4,288,144,10,10,0,1,"#000000");
+                //LODOP.ADD_PRINT_SHAPE(4,288,254,10,10,0,1,"#000000");
+            }
+            LODOP.ADD_PRINT_TEXT(225,135,600,25,name);
+            LODOP.ADD_PRINT_TEXT(225,440,600,25,hytype);
+            LODOP.ADD_PRINT_TEXT(250,135,300,25,qyaddress);
+		    LODOP.SET_PRINT_STYLEA(8,"FontSize",10)
+            LODOP.ADD_PRINT_TEXT(255,520,600,25,phone);
+            LODOP.ADD_PRINT_TEXT(318,135,600,25,sstype);
+            //LODOP.ADD_PRINT_TEXT(318,300,600,25,sstype);
+            LODOP.ADD_PRINT_TEXT(375,245,100,25,skpsl);
+            LODOP.ADD_PRINT_TEXT(375,315,100,25,skpje);
+            LODOP.ADD_PRINT_TEXT(375,375,600,25,skp);
+            LODOP.ADD_PRINT_TEXT(405,245,100,25,bspsl);
+            LODOP.ADD_PRINT_TEXT(405,315,100,25,bspje);
+            LODOP.ADD_PRINT_TEXT(405,375,600,25,bsp);
+            LODOP.ADD_PRINT_TEXT(435,245,600,25,fwonesl);
+            LODOP.ADD_PRINT_TEXT(435,315,600,25,fwoneje);
+            LODOP.ADD_PRINT_TEXT(465,245,600,25,fwtwosl);
+            LODOP.ADD_PRINT_TEXT(465,315,600,25,fwtwoje);
+            LODOP.ADD_PRINT_TEXT(440,380,600,25,time.split('-')[0]);
+            LODOP.ADD_PRINT_TEXT(440,435,600,25,time.split('-')[1]);
+            LODOP.ADD_PRINT_TEXT(440,475,600,25,time.split('-')[2]);
+            LODOP.ADD_PRINT_TEXT(440,530,600,25,time.split('-')[3]);
+            LODOP.ADD_PRINT_TEXT(440,585,600,25,time.split('-')[4]);
+            LODOP.ADD_PRINT_TEXT(440,620,600,25,time.split('-')[5]);
+            LODOP.ADD_PRINT_TEXT(510,260,600,25,hejidx[0]);
+            LODOP.ADD_PRINT_TEXT(510,315,600,25,hejidx[1]);
+            LODOP.ADD_PRINT_TEXT(510,370,600,25,hejidx[2]);
+            LODOP.ADD_PRINT_TEXT(510,425,600,25,hejidx[3]);
+            LODOP.ADD_PRINT_TEXT(510,550,600,25,hejisz);
+            //LODOP.ADD_PRINT_TEXT(445,570,600,25,"1");
+            //LODOP.ADD_PRINT_TEXT(510,270,340,25,"壹、贰、叁、肆、伍、陆、柒、捌、玖、拾 ");
+            LODOP.ADD_PRINT_TEXT(570,250,349,25,kaihu);
+            //日期
+            LODOP.ADD_PRINT_TEXT(950,80,600,25,da);
+            LODOP.ADD_PRINT_TEXT(950,450,600,25,da);
+            //LODOP.ADD_PRINT_TEXT(600,270,354,25,"电话地址。。。。。。。");
+
+
+	};
+
+
+  </script>
+  <body>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">打印平台</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+            <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> 税控设备</a></li>
+            <li><a href="charts.html"><i class="fa fa-bar-chart-o"></i> 其他</a></li>
+            <li><a href="tables.html"><i class="fa fa-table"></i> 备用</a></li>
+            <li><a href="forms.html"><i class="fa fa-edit"></i> 备用</a></li>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </nav>
+      <div id="page-wrapper">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h1>税控设备购销及技术服务合同书 <small>合同 打印</small></h1>
+            <ol class="breadcrumb">
+              <li class="active"><i class="fa fa-dashboard"></i> 合同打印</li>
+            </ol>
+              <form action="/sousuo/" method="get">
+                    <label>ID:</label>
+                    <input type="text" name="ID" >
+                    <input type="submit" value="搜索">
+                    <input type="button" onclick="myPreview()" value="打印">
+                    <input type="button" onclick="ceshi()" value="测试">
+              </form>
+              <div  style="width: 1000px ;height: 1000px ; border: 0px solid black" >
+                <table border="1">
+                    <tr>
+                        <th style="text-align: center">企业名称</th>
+                        <td id="qyname" colspan="6">{{ user.qyname }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">纳税人识别号</th>
+                        <td id="sbh" colspan="3">{{ user.sbh }}</td>
+                        <th style="text-align: center">企业类型</th>
+                        <td id="qytype" colspan="2">{{ user.qytype }}</td>
+                    </tr>
+                     <tr>
+                        <th style="text-align: center">客户姓名</th>
+                        <td id="name" colspan="3">{{ user.name }}</td>
+                        <th style="text-align: center" width="80px">行业类型</th>
+                        <td id="hytype" colspan="2">{{ user.hytype }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">企业地址</th>
+                        <td id="qyaddress" colspan="4">{{ user.qyaddress }}   </td>
+                        <th style="text-align: center" width="80px">联系电话</th>
+                        <td id="phone" width="300px">{{ user.phoneg }},{{ user.phoney }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">发票类型</th>
+                        <td id="fptype" colspan="6">{{ user.fptype }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">所属税务机关</th>
+                        <td id="sstype" colspan="6">{{ user.sstype }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center" width="120px">申请设备名称</th>
+                        <th style="text-align: center" width="150px">单价</th>
+                        <th style="text-align: center" width="100px">数量</th>
+                        <th style="text-align: center" width="150px">金额</th>
+                        <th style="text-align: center" width="80px" colspan="3">设备编号</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">税控盘(TCG-01)</th>
+                        <th style="text-align: center" width="150px">200元</th>
+                        <th width="100px"><input id="skpsl" type="text" style="text-align: center"  onblur="upperCaseskp()" value="1" ></th>
+                        <th width="150px" id="skpje">200</th>
+                        <td id="skp" width="80px" colspan="3">{{ user.skp }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">报税盘(TCG-02)</th>
+                        <th style="text-align: center" width="150px">100元</th>
+                        <th width="100px"><input type="text" id="bspsl"  style="text-align: center" onblur="upperCasebsp()" ></th>
+                        <th id="bspje" width="150px">0</th>
+                        <td id="bsp" width="80px" colspan="3">{{ user.bsp }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center" rowspan="2">技术维护费</th>
+                        <th style="text-align: center" width="150px">280元/套/年</th>
+                        <th width="100px"><input id="fwonesl" type="text" style="text-align: center"  onblur="upperCasefwone()" value="1" ></th>
+                        <th id="fwoneje" width="150px">280</th>
+                        <td id="time" rowspan="2" width="80px" colspan="3">{{ user.qtime }}-{{ user.ztime }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center" width="150px">140元/套/年</th>
+                        <th width="100px"><input id="fwtwosl" type="text" style="text-align: center" onblur="upperCasefwtwo()" ></th>
+                        <th id="fwtwoje" width="150px">0</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">合计金额</th>
+                        <td><input type="button" value="合计" onclick="hejijine()" ></td>
+                        <td id="hejidx" colspan="4" value="">零肆捌零</td>
+                        <td id="hejisz">480</td>
+                    </tr>
+                    <tr>
+                        <th colspan="7">根据发改价格【2012】2155号和财税【2012】15号文规定，以上设备(含分开票机)初次购买及每年维护费可全额抵减。</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center" rowspan="2">开票信息</th>
+                        <th style="text-align: center">开户银行及账号</th>
+                        <td id="kaihu" colspan="5">{{ user.yinhang }},{{ user.zhanghao }}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">开票地址及电话</th>
+                        <td colspan="5"></td>
+                    </tr>
+                </table>
+              </div>
+
+
+
+
+          </div>
+        </div><!-- /.row -->
+
+      </div><!-- /#page-wrapper -->
+
+    </div><!-- /#wrapper -->
+
+    <!-- JavaScript -->
+    <script src="{% static "js/jquery-1.10.2.js" %}"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+
+    <!-- Page Specific Plugins -->
+    <script src="{% static "js/raphael-min.js" %}"></script>
+    <script src="{% static "js/morris-0.4.3.min.js" %}"></script>
+    <script src="{% static "js/morris/chart-data-morris.js" %}"></script>
+    <script src="{% static "js/tablesorter/jquery.tablesorter.js" %}"></script>
+    <script src="{% static "js/tablesorter/tables.js" %}"></script>
+
+  </body>
+</html>

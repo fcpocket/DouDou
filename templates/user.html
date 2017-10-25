@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    function select() {
+        name = $("#testName").val();
+        alter(name)
+        $.ajax({
+            url:"/a/a",
+            type:"POST",
+            data:"name="+name,
+            dataType:"json",
+            success:function (result) {
+                if(result=1){
+                    alert(1)
+
+                }
+            }
+        })
+    }
+</script>
+<body>
+    <input type="button" id="testId"   onclick="select()" >
+    <input type="text" id="testName">
+</body>
+</html>
